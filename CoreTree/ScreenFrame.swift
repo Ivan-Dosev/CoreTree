@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Foundation
+
 
 struct ScreenFrame: View {
     
@@ -28,6 +30,7 @@ struct ScreenFrame: View {
         }
     }
     
+@State var isOpasity : Bool = false
 @State var inButton = 0
 @State var inOblack = 0
     
@@ -51,23 +54,15 @@ struct ScreenFrame: View {
         }.pickerStyle(SegmentedPickerStyle())
          .offset(y: -100)
             ZStack {
+                
                 loadView()
-                loadOblack()
-// Tree all
-//                     ViewPng12()
-//                     ViewPng4()
-//                     ViewPng13()
-//                     ViewPng19()
-//                     ViewPng10()
-//                     ViewPng9()
-//                     ViewPng3()
-//                       ViewPng1()
-// Oblack all
-//                     ViewOblackBal()
-//                     ViewOblackCragal()
-//                     ViewOblackSaren()
-//                     ViewOblackSin()
-//                       ViewOblackCheren()
+                    .modifier(Arda(pct: self.isOpasity ? 1 : 0.1))
+                
+                if self.isOpasity {
+                                    loadOblack()
+                }
+              
+
             }
             .frame(width: width / 1.1, height: width / 1.1 , alignment: .center)
             .background(
@@ -96,8 +91,23 @@ struct ScreenFrame: View {
 
         }.pickerStyle(SegmentedPickerStyle())
          .offset(y: 100)
+            
+            Button(action: {
+            
+                    self.isOpasity.toggle()
+            
+                      
+            }) {
+                Text("🎲")
+                    .padding()
+            }
+
         }
     }
+    
+
+
+    
     func loadView() -> AnyView {
         
         switch inButton {
@@ -147,3 +157,18 @@ struct ScreenFrame_Previews: PreviewProvider {
         ScreenFrame()
     }
 }
+ 
+struct Arda: AnimatableModifier {
+
+        var pct : CGFloat
+        
+        var animatableData: CGFloat {
+            get { pct }
+            set { pct = newValue }
+        }
+    
+    func body(content: Content) -> some View {
+        return content.opacity(Double(pct)).animation(.easeInOut(duration: 10))
+
+    }
+    }

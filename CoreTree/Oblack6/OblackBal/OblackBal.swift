@@ -27,7 +27,7 @@ struct ViewOblackBal: View {
     var body: some View {
         oblackBal
             .onAppear(){
-                let timelineOblackBal : Timeline = Timeline_OblackBal(view: oblackBal.oblackBal, duration: 5, repeatCount: 100)
+                let timelineOblackBal : Timeline = Timeline_OblackBal(view: oblackBal.oblackBal, duration: 5, repeatCount: 1)
                     timelineOblackBal.play()
             }
     }
