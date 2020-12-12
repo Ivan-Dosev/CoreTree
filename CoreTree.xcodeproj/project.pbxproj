@@ -172,6 +172,7 @@
 		CCF36E742583D2F90069311A /* OblackBal_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF36E702583D2F90069311A /* OblackBal_View.swift */; };
 		CCF36E752583D2F90069311A /* OblackBal_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF36E702583D2F90069311A /* OblackBal_View.swift */; };
 		CCF36E762583D2F90069311A /* OblackBal_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF36E702583D2F90069311A /* OblackBal_View.swift */; };
+		CCF36E8E2584D4CA0069311A /* MagicView.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCF36E8D2584D4CA0069311A /* MagicView.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +258,7 @@
 		CCF36E3B2583D1610069311A /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Extension.swift"; path = "../UIView+Extension.swift"; sourceTree = "<group>"; };
 		CCF36E6F2583D2F90069311A /* Timeline_OblackBal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline_OblackBal.swift; sourceTree = "<group>"; };
 		CCF36E702583D2F90069311A /* OblackBal_View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OblackBal_View.swift; sourceTree = "<group>"; };
+		CCF36E8D2584D4CA0069311A /* MagicView.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MagicView.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +312,7 @@
 				CCF36C3E2583CA170069311A /* CoreTreeApp.swift */,
 				CCF36C402583CA170069311A /* ContentView.swift */,
 				CCF36CD82583CC390069311A /* ScreenFrame.swift */,
+				CCF36E8D2584D4CA0069311A /* MagicView.sks */,
 				CCF36D7E2583CF910069311A /* Oblack6 */,
 				CCF36CE22583CDE60069311A /* Tree8 */,
 				CCF36C6C2583CA370069311A /* Animation */,
@@ -627,6 +630,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCF36C462583CA190069311A /* Preview Assets.xcassets in Resources */,
+				CCF36E8E2584D4CA0069311A /* MagicView.sks in Resources */,
 				CCF36C432583CA190069311A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

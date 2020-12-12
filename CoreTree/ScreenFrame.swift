@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SpriteKit
 import Foundation
 
 
@@ -30,7 +31,17 @@ struct ScreenFrame: View {
         }
     }
     
-@State var isOpasity : Bool = false
+    var magickScene : SKScene {
+
+        let scene = MagicScene()
+        scene.scaleMode = .fill
+        scene.backgroundColor = .white
+        return scene
+    }
+    
+@State var isOpasity  : Bool = false
+@State var isGameOver : Bool = false
+    
 @State var inButton = 0
 @State var inOblack = 0
     
@@ -54,13 +65,22 @@ struct ScreenFrame: View {
         }.pickerStyle(SegmentedPickerStyle())
          .offset(y: -100)
             ZStack {
-                
-                loadView()
-                    .modifier(Arda(pct: self.isOpasity ? 1 : 0.1))
-                
-                if self.isOpasity {
-                                    loadOblack()
+                if self.isGameOver {
+                    
+                    SpriteView(scene: magickScene)
+                      .background(Color.clear)
+                        .frame(width: 480, height: 480, alignment: .center)
+                        .disabled(false)
+                    
+                }else{
+                    loadView()
+                        .modifier(Arda(pct: self.isOpasity ? 1 : 0.1))
+                    
+                    if self.isOpasity {
+                                        loadOblack()
+                    }
                 }
+
               
 
             }
@@ -91,16 +111,27 @@ struct ScreenFrame: View {
 
         }.pickerStyle(SegmentedPickerStyle())
          .offset(y: 100)
-            
-            Button(action: {
-            
-                    self.isOpasity.toggle()
-            
-                      
-            }) {
-                Text("🎲")
-                    .padding()
+            HStack {
+                Button(action: {
+                
+                        self.isOpasity.toggle()
+                
+                          
+                }) {
+                    Text("Polivane")
+                        .padding()
+                }
+                
+                
+                Button(action: {
+                                   self.isGameOver.toggle()
+                }) {
+                    Text("Game Over")
+                        .padding()
+                }
+
             }
+
 
         }
     }
@@ -168,7 +199,73 @@ struct Arda: AnimatableModifier {
         }
     
     func body(content: Content) -> some View {
-        return content.opacity(Double(pct)).animation(.easeInOut(duration: 10))
+        return content
+                .opacity(Double(pct))
+                .animation(.easeInOut(duration: 10))
+    }
+}
+
+
+class MagicScene: SKScene {
+
+    
+    override func didMove(to view: SKView) {
+       super.didMove(to: view)
+//
+//        let txt : SKLabelNode = SKLabelNode()
+//            txt.text = "game over"
+//            txt.position = CGPoint(x: frame.midX, y: frame.midY)
+//            txt.fontSize = 15
+//            txt.setScale(0.01)
+//            txt.zPosition = 30
+//            txt .fontColor = UIColor.green
+//            addChild(txt)
+            
+        
+        loadGameOver()
+
+
+     if let   emitter: SKEmitterNode = SKEmitterNode(fileNamed: "MagicView") {
+        print("oooo")
+
+              emitter.particleTexture = SKTexture(imageNamed: "png12")
+              emitter.position = CGPoint(x: frame.midX, y: frame.midY)
+              emitter.particleBirthRate = 2
+              emitter.setScale(0.001)
+//                  emitter.alpha = 1
+              addChild(emitter)
+
+            emitter.run(SKAction.fadeIn(withDuration: 0.5)) {
+                emitter.run(SKAction.fadeOut(withDuration: 15.0)) {
+                    emitter.removeFromParent()
+                }
+            }
+
+        }
+    }
+//    func animate() {
+//        let fadeOut = SKAction.fadeOut(withDuration: 0.5)
+//        let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
+//        let secuence = SKAction.sequence([fadeOut, fadeIn])
+//
+//        gameover.run(SKAction.repeatForever(secuence))
+//    }
+    func loadGameOver() {
+        
+        let txt : SKLabelNode = SKLabelNode()
+            txt.text = "tree is dead"
+            txt.position = CGPoint(x: frame.midX, y: frame.midY)
+            txt.fontSize = 15
+            txt.setScale(0.005)
+            txt.zPosition = 30
+            txt .fontColor = UIColor.green
+            addChild(txt)
+                let fadeOut = SKAction.fadeOut(withDuration: 0.5)
+                let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
+                let secuence = SKAction.sequence([fadeOut, fadeIn])
+        
+                txt.run(SKAction.repeatForever(secuence))
 
     }
-    }
+
+}
